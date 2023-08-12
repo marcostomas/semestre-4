@@ -1,5 +1,5 @@
-# Veja mais sobre R em:
-# https://www.youtube.com/playlist?list=PLWhiA_CuQkbCKivmr-5iZy-Fo8ic1iyB2
+# Neste arquivo, apresento os principais conceito até a aula 11. Veja mais sobre
+# R em:https://www.youtube.com/playlist?list=PLWhiA_CuQkbCKivmr-5iZy-Fo8ic1iyB2
 
 # Recomendo instalar esta extensão para VS Code:
 # https://marketplace.visualstudio.com/items?itemName=REditorSupport.r
@@ -140,13 +140,47 @@ repeat{ # Cria um loop infinito, equivalente a while(true) em C ou Java. É poss
 }
 
 # Criando funções
+# Funções em R não utilizam tipo de retorno. Para retornar um valor, usa-se a
+# função return(). O primeiro exemplo é equivalente a um tipo de retorno void
+# e o segundo é equivalente a um tipo de retorno String ou char*.
+# O terceiro exemplo demonstra a criação de uma lambda function/arrow function.
+# O quarto exemplo mostra como criar uma função que aceita múltiplos parâmetros,
+# utilizando o operador splat/rest. Existem outras formas de criar funções em R,
+# mas acredito que não serão necessárias, por agora, e por isso decidi pular.
 
-imprimeMensagem <- function(msg) {
+
+# 1º exemplo
+imprime_mensagem <- function(msg) {
     m <- paste("Mensagem", msg, sep = ": ")
     print(m)
 }
+imprime_mensagem("Olá, pessoas!")
 
-imprimeMensagem("Olá, pessoas!")
+# 2º exemplo
+imprime_mensagem <- function(msg) {
+    m <- paste("Mensagem", msg, sep = ": ")
+    return(m)
+}
+ret <- imprime_mensagem("Olá, pessoas!")
+print(ret)
+
+# 3º exemplo
+imprime_mensagem <- function(msg) paste("Mensagem", msg, sep = ": ")
+msg <- imprime_mensagem("Salve!")
+print(msg)
+
+# 4º exemplo
+soma <- function(...) {
+    v <- c(...) # Faz com que os parâmetros se transformem em um vetor para usarmos o for
+    s <- 0
+    for (valor in v) {
+        s <- s + valor
+    }
+    return(s)
+}
+ret <- soma(1, 54, 74, 23, 1, 34, 89)
+print(ret) # Saída: 276
+
 
 # O operador duplo dois-pontos (::) seleciona as definições (de funções) em um
 # namespace específico, desde que elas sejam exportadas.
