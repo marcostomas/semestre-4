@@ -1,0 +1,88 @@
+1. As suposições fundamentais que orientam a aplicação das técnicas de dependência são: normalidade, homoscedasticidade, linearidade e ausência de erros correlacionados.
+
+Normalidade se refere à forma da distribuição de dados para uma variável métrica individual e sua correspondência com a distribuição normal.
+
+Homoscedasticidade se refere à suposição de que as variáveis dependentes exibem níveis iguais de variância ao longo do domínio da(s) variável(is) preditora(s).
+
+Linearidade é uma suposição implícita em todas as técnicas multivariadas baseadas em medidas correlacionais de associação, incluindo regressão múltipla, regressão logística, análise fatorial, e modelagem de equações estruturais.
+
+Ausência de erros correlacionados, já que em qualquer técnica de dependência as previsões não são perfeitas, e raramente encontramos uma situação na qual elas sejam.
+
+2. Os principais prejuízos de trabalhar com uma distribuição de dados não normal são: Violações de suposições estatísticas, ou seja, alguns testes estatísticos como testes de hipótese que pressupõe que a distribuição seja normal pode levar a resultados incorretos caso a distribuição seja não normal. Outro prejuízo que a não normalidade pode causar é a limitação de técnicas estatísticas como a regressão linear, que pressupõe a normalidade dos resíduos
+
+
+3. A avaliação da normalidade de uma variável é uma etapa importante na análise estatística, pois muitos métodos estatísticos assumem que os dados seguem uma distribuição normal. Vale ressaltar que a normalidade é uma suposição importante, mas não é sempre necessária, dependendo do método estatístico que está sendo utilizado e do tamanho da amostra. É importante considerar o contexto e as limitações dos dados ao avaliar a normalidade. Alguns exemplos de avaliação de normalidade de uma variável e seu código em R:
+
+a. Histograma e Gráfico de Probabilidade Normal:
+
+	Comece traçando um histograma dos dados e sobrepondo um gráfico de probabilidade normal para visualmente avaliar a semelhança com uma distribuição normal.
+
+   ```R
+   # Amostra de dados (substitua com seus próprios dados)
+   dados <- rnorm(100)
+
+   # Histograma
+   hist(dados, probability = TRUE, main = "Histograma")
+
+   # Gráfico de probabilidade normal
+   qqnorm(dados)
+   qqline(dados)
+   ```
+
+b. Testes Estatísticos:
+
+	Existem vários testes estatísticos que podem ser usados para avaliar a normalidade. Dois testes comuns são o teste de Shapiro-Wilk e o teste de Kolmogorov-			 Smirnov.
+
+	```R
+
+	# Amostra de dados (substitua com seus próprios dados)
+	dados <- rnorm(100)
+
+	# Teste de Shapiro-Wilk
+	shapiro.test(dados)
+
+	# Teste de Kolmogorov-Smirnov
+	ks.test(dados, "pnorm", mean = mean(dados), sd = sd(dados))
+	```
+Se o valor p (p-value) for significativo (geralmente menor que 0,05), pode-se rejeitar a hipótese nula de que os dados são normalmente distribuídos.
+
+   
+c. Teste de Homocedasticidade
+
+O	 teste de homocedasticidade é usado para verificar se a variabilidade dos erros (ou resíduos) de um modelo estatístico é constante em todos os níveis de uma variável independente (ou preditora). Em outras palavras, ele verifica se a dispersão dos resíduos é aproximadamente a mesma em todos os níveis da variável independente, o que é uma das suposições importantes para a análise de regressão linear.
+
+	Um dos testes mais comuns para a homocedasticidade é o teste de Levene, que compara as variâncias dos resíduos em diferentes grupos ou níveis da variável independente. Aqui está como realizar o teste de homocedasticidade usando R, usando a função leveneTest do pacote car como exemplo:
+
+	```R
+
+	# Carregue o pacote 'car' se ainda não estiver instalado
+	# install.packages("car")
+	library(car)
+
+	# Suponhamos que você tenha um modelo de regressão 'modelo' e queira testar a homocedasticidade
+	# Substitua 'modelo' pelo seu modelo real
+	# Por exemplo: modelo <- lm(y ~ x1 + x2, data = dados)
+
+	# Realize o teste de Levene para a homocedasticidade
+	teste_homocedasticidade <- leveneTest(modelo)
+
+	# Exiba os resultados do teste
+	print(teste_homocedasticidade)
+	```
+
+	Os resultados incluirão estatísticas de teste (por exemplo, estatística F) e valores p. Se o valor p for maior que um nível de significância (como 0,05), a hipótese nula não é rejeitada, o que sugere que não há evidências suficientes para concluir que a homocedasticidade foi violada. Por outro lado, se o valor p for menor que o nível de significância escolhido, a homocedasticidade foi violada. Nesse caso, pode ser necessário explorar transformações de dados ou outras abordagens para lidar com a heterocedasticidade.
+
+
+4. No caso de não existir normalidade na distribuição é possível usar ações corretivas para a não normalidade, que são técnicas de transformação de dados com o objetivo de acomoda-los para corrigir sua distribuição. É importante remediar esse problema visto que a não normalidade pode causar outras violações.
+
+5. As duas causas mais comuns para a heteroscedasticidade são: o tipo de variável, já que muitos tipos de variáveis têm uma tendência natural a diferenças na dispersão e a distribuição assimétrica de uma ou mais variáveis.
+
+6. Os resíduos (a diferença entre o estimado e o valor real) podem nos mostrar o quão bem um modelo explica uma certa variável por regressão linear, ou seja, quanto menor os resíduos (e consequentemente SQR ou SSE) melhor as estimativas são. Em outras palavras, os resíduos apontam qualquer parte não-linear da relação entre a variável dependente com as independentes.  Se os resíduos não seguem uma dirstribuição normal, pode haver uma redução do poder estatístico dos testes, tornando-se mais difícil a detecção de diferenças significativas, uma vez que, viola a suposição de testes paramétricos.
+
+7. A presença de não linearidade entre variáveis independentes e dependentes pode ter diversos impactos na análise estatística e nos modelos de regressão, como: erros de predição, coeficientes de regressão inadequados, R² e estatísticas relacionadas, transformações de variáveis e modelos não lineares.
+Em resumo, a não linearidade entre variáveis pode ter um impacto significativo na análise estatística, exigindo a escolha de modelos apropriados, transformações de variáveis ou a consideração de modelos não lineares para capturar com precisão as relações nos dados.
+
+8. Para identificar relações não-lineares podemos utilizar digramas de dispersão, além de analisar a linearidade dos dados por meio dos resíduos - caso os pontos mostrem uma relação aleatória, não há linearidade.
+
+10. Para detectar erros correlacionados em seus dados, é fundamental que o pesquisador comece por identificar potenciais fontes causadoras. Em seguida, é preciso organizar ou classificar os valores de uma variável em relação à variável suspeita e, posteriormente, realizar uma análise minuciosa em busca de padrões.
+A avaliação da normalidade de uma variável é uma etapa importante na análise estatística, pois muitos métodos estatísticos assumem que os dados seguem uma distribuição normal. Existem várias maneiras de avaliar a normalidade de uma variável no R, e aqui estão algumas técnicas com exemplos:
