@@ -1,0 +1,38 @@
+*{
+    font-size: 16px;
+    background-color: yellowgreen;
+}
+
+#botoes{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 60%;
+    height: 50%;
+}
+
+#secao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 900px;
+    width: 100%;
+    flex-direction: column;
+}
+
+.botao{
+    width: 8rem;
+    height: 3rem;
+    background-color: cornflowerblue;
+    border: 1px solid #000;
+    font-weight: bold;
+    color: #F4F4F4;
+}
+
+p{
+    font-size: 54px !important;
+}
+
+button{
+    cursor: pointer;
+}

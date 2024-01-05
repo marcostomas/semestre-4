@@ -55,7 +55,6 @@ public class Memoria {
 
     public boolean temReader() {
         for (Thread t : threads_em_execucao) {
-            // System.out.println(t.getClass());
             if (t.getClass() == Reader.class)
                 return true;
         }
