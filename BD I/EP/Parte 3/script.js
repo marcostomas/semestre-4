@@ -1,51 +1,126 @@
 const uri = "http://localhost:8000/";
-let endpoint = null;
+var endpoint = null;
+var funcaoAtivada = null;
 
 function funcao1() {
+    this.funcaoAtivada = 1;
     this.endpoint = "funcao1";
-    const elemento = document.querySelector("#modal");
 
-    elemento.classList.contains("display-none") ? abrirModal(elemento) : null;
-}
-
-function abrirModal(elemento) {
-    elemento.classList.add("display-flex");
-    elemento.classList.remove("display-none");
-}
-
-function fecharModal() {
-    const elemento = document.querySelector("#modal");
-    elemento.classList.add("display-none");
-    elemento.classList.remove("display-flex");
-
-    document.getElementsByClassName("input-container")[0].classList.remove("d-flex");
-    document.getElementsByClassName("input-container")[0].classList.add("d-none");
+    this.abrirModal();
 }
 
 function funcao2() {
+    this.funcaoAtivada = 2;
     this.endpoint = "funcao2";
+
+    this.abrirModal();
 }
 
 function funcao3() {
+    this.funcaoAtivada = 3;
     this.endpoint = "funcao3";
+
+    this.abrirModal();
 }
 
 function funcao4() {
+    this.funcaoAtivada = 4;
     this.endpoint = "funcao4";
+
+    this.abrirModal();
+}
+
+function funcao5() {
+    this.funcaoAtivada = 5;
+    this.endpoint = "funcao5";
+
+    const lista = document.getElementById("nominados-todos-eventos");
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", uri + endpoint, true);
+    xhttp.onreadystatechange = function () {//Função a ser chamada quando a requisição retornar do servidor
+        if (xhttp.readyState == 4 && xhttp.status == 200) {//Verifica se o retorno do servidor deu certo
+            for (let i = 0; i < 100; i++) {
+                let novoItem = document.createElement("li").innerText = xhttp.responseText[0]
+                lista.appendChild(novoItem);
+                console.log(lista);
+            }
+        }
+    }
+
+    this.abrirModal();
+}
+
+function funcao6() {
+    this.funcaoAtivada = 6;
+    this.endpoint = "funcao6";
+
+    const elemento = document.querySelector("#modal");
+    elemento.classList.contains("display-none") ? abrirModal(elemento, 3) : null;
 }
 
 
-// (
-//     async () => {
-//         try {
-//             var response = await fetch(url + endpoint);
-//             var data = await response.json();
-//             console.log(data);
-//         } catch (e) {
-//             console.log('Booo', e);
-//         }
-//     }
-// )();
+function abrirModal() {
+    const elemento = document.querySelector("#modal");
+    elemento.classList.add("display-flex");
+    elemento.classList.remove("display-none");
+
+    switch (funcaoAtivada) {
+        case 1:
+            document.getElementById("func1").classList.add("display-flex")
+            document.getElementById("func1").classList.remove("display-none")
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            document.getElementById("func5").classList.add("display-flex")
+            document.getElementById("func5").classList.remove("display-none")
+            break;
+        case 6:
+            break;
+        default:
+            break;
+    }
+}
+
+function fecharModal() {
+    switch (funcaoAtivada) {
+        case 1:
+            document.getElementById("func1").classList.add("display-none");
+            document.getElementById("func1").classList.remove("display-flex");
+
+            document.getElementById("func1-forms").classList.add("display-none")
+            document.getElementById("func1-forms").classList.remove("display-flex")
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            document.getElementById("func4").classList.remove("display-flex");
+            document.getElementById("func4").classList.add("display-none");
+            break;
+        case 5:
+            document.getElementById("func5").classList.remove("display-flex");
+            document.getElementById("func5").classList.add("display-none");
+            break;
+        case 6:
+            break;
+        default:
+            break
+
+    }
+
+    this.funcaoAtivada = 0;
+
+    const elemento = document.querySelector("#modal");
+    elemento.classList.add("display-none");
+    elemento.classList.remove("display-flex");
+}
 
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
@@ -70,9 +145,9 @@ window.onclick = function (event) {
 function escolhaTipo(tipo) {
     const span = document.getElementById("nome-span");
 
-    if (document.getElementsByClassName("input-container")[0].classList.contains("d-none")) {
-        document.getElementsByClassName("input-container")[0].classList.add("d-flex");
-        document.getElementsByClassName("input-container")[0].classList.remove("d-none");
+    if (document.getElementsByClassName("input-container")[0].classList.contains("display-none")) {
+        document.getElementsByClassName("input-container")[0].classList.add("display-flex");
+        document.getElementsByClassName("input-container")[0].classList.remove("display-none");
     }
 
     if (tipo === 1) {

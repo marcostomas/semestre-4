@@ -29,12 +29,13 @@ html, body{
 }
 
 .botao{
-    width: 10rem;
-    height: 5rem;
+    width: 11rem;
+    height: 8rem;
     background-color: cornflowerblue;
     border: 1px solid #000;
     font-weight: bold;
     color: #F4F4F4;
+    border-radius: 13px;
 }
 
 p{
@@ -95,7 +96,6 @@ button{
 }
 
 .form-container{
-    display: flex;
     justify-content: center;
     align-items:  flex-start;
     flex-grow: 4;
@@ -168,14 +168,6 @@ button{
     margin-left: 2rem;
 }
 
-.d-flex{
-    display: flex;
-}
-
 .fd-column{
     flex-direction: column;
-}
-
-.d-none{
-    display: none;
 }

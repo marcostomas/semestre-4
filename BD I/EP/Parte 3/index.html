@@ -13,17 +13,18 @@
         <p>Interface do EP</p>
         <div id="botoes">
             <button class="botao" onclick="funcao1()">Inserir dados</button>
-            <button class="botao" onclick="funcao2()">Os 10 filmes mais premiados</button>
-            <button class="botao" onclick="funcao3()">Os 10 filmes mais reproduzidos</button>
-            <button class="botao" onclick="funcao4()">Listar os melhores atores</button>
-            <button class="botao" onclick="funcao4()">Listar os nominados e indicados</button>
+            <button class="botao" onclick="funcao2()">Gráfico: Os 10 atores mais premiados</button>
+            <button class="botao" onclick="funcao3()">Gráfico: Os 10 filmes mais premiados</button>
+            <button class="botao" onclick="funcao4()">Gráfico: Os 10 filmes com maior arrecadação</button>
+            <button class="botao" onclick="funcao5()">Listar os atores nominados a melhor ator/atriz em todos os eventos</button>
+            <button class="botao" onclick="funcao6()">Listar os nominados e vencedores de um prêmio</button>
         </div>
 
         <section id="modal" class="display-none">
             <div class="header-modal">
                 <span onclick="fecharModal()">X</span>
             </div>
-            <div class="form-container">
+            <div id="func1" class="display-none fd-column" style="height: 90%;">
                 <div class="dropdown">
                     <span>Escolha o tipo de inserção:</span>
                     <button onclick="abrirDropdown()" class="dropbtn">Escolha o tipo de inserção</button>
@@ -34,14 +35,18 @@
                         <span onclick="escolhaTipo(4)">Premiações e Filmes</span>
                     </div>
                 </div>
-                <div class="mt-3 input-container d-none">
-                    <div id="span-container" class="d-flex fd-column">
+                <div id="func1-forms" class="mt-3 input-container display-none">
+                    <div id="span-container" class="display-flex fd-column">
                         <span id="nome-span">Valor:</span>
                     </div>
-                    <form for=" insercao-dados" class="formulario">
+                    <form for="insercao-dados" class="formulario">
                         <input type="text" name="insercao-dados" placeholder="Digite aqui" class="input-dados" />
                     </form>
                 </div>
+            </div>
+            <div id="func5" class="display-none">
+                <ul id="nominados-todos-eventos">
+                </ul>
             </div>
         </section>
     </section>
