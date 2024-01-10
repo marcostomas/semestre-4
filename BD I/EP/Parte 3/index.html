@@ -39,14 +39,35 @@
                     <div id="span-container" class="display-flex fd-column">
                         <span id="nome-span">Valor:</span>
                     </div>
-                    <form for="insercao-dados" class="formulario">
-                        <input type="text" name="insercao-dados" placeholder="Digite aqui" class="input-dados" />
+                    <form action="http://localhost:8000/" method="get" class="formulario">
+                        <input type="text" name="valor-1" placeholder="Digite aqui" class="input-dados" />
                     </form>
                 </div>
             </div>
-            <div id="func5" class="display-none">
-                <ul id="nominados-todos-eventos">
+            <div id="func2" class="display-none" style="height: 90%;">
+                <canvas id="dez-atores-mais-premiados"></canvas>
+            </div>
+            <div id="func3" class="display-none" style="height: 90%;">
+                <canvas id="dez-filmes-mais-premiados"></canvas>
+            </div>
+            <div id="func4" class="display-none" style="height: 90%;">
+                <canvas id="dez-filmes-maior-arrecadacao"></canvas>
+            </div>
+            <div id="func5" class="display-none" style="height: 90%;">
+                <ul id="nominados-melhor-ator-todos-eventos">
                 </ul>
+            </div>
+            <div id="func6" class="display-none" style="height: 80%; width: 100%;">
+                <div class="container-func6">
+                    <div class="busca-do-premio">
+                        <label for="premio">Digite o nome do prêmio:</label>
+                        <input type="text" placeholder="Digite aqui" class="input-dados" id="premio" />
+                        <button id="botao-buscar-atores-filme" onclick="buscarLista()">Pesquisar</button>
+                    </div>
+
+                    <ul id="nominados-por-premio" class="display-none fd-column">
+                    </ul>
+                </div>
             </div>
         </section>
     </section>
@@ -54,5 +75,6 @@
 </body>
 
 <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </html>

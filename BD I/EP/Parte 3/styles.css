@@ -171,3 +171,21 @@ button{
 .fd-column{
     flex-direction: column;
 }
+.container-func6{
+    width: 100%;
+    height: 100%;
+}
+.busca-do-premio{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+
+#dez-atores-mais-premiados,
+#dez-filmes-mais-premiados,
+#dez-filmes-maior-arrecadacao{
+    width: 100%;
+    height: 100%;
+}
