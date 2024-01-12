@@ -26,7 +26,7 @@ public class Artista {
     private Integer anoInicio;
 
     @Column(name = "ano_nascimento")
-    private Date anoNascimento;
+    private Integer anoNascimento;
 
     @Column(name = "nome_verdadeiro", length = 50, nullable = false)
     private String nomeVerdadeiro;
@@ -86,11 +86,11 @@ public class Artista {
         this.anoInicio = anoInicio;
     }
 
-    public Date getAnoNascimento() {
+    public Integer getAnoNascimento() {
         return anoNascimento;
     }
 
-    public void setAnoNascimento(Date anoNascimento) {
+    public void setAnoNascimento(Integer anoNascimento) {
         this.anoNascimento = anoNascimento;
     }
 

@@ -30,18 +30,22 @@
                     <button onclick="abrirDropdown()" class="dropbtn">Escolha o tipo de inserção</button>
                     <div id="myDropdown" class="dropdown-content">
                         <span onclick="escolhaTipo(1)">Pessoa</span>
-                        <span onclick="escolhaTipo(2)">Eventos e Prêmios</span>
-                        <span onclick="escolhaTipo(3)">Nominações</span>
-                        <span onclick="escolhaTipo(4)">Premiações e Filmes</span>
+                        <span onclick="escolhaTipo(2)">Evento</span>
+                        <span onclick="escolhaTipo(3)">Prêmio</span>
+                        <span onclick="escolhaTipo(4)">Nominação Artista</span>
+                        <span onclick="escolhaTipo(5)">Premiação</span>
+                        <span onclick="escolhaTipo(6)">Filme</span>
+                        <span onclick="escolhaTipo(7)">Participação</span>
+                        <span onclick="escolhaTipo(8)">Nominação Filme</span>
+                        <span onclick="escolhaTipo(9)">Júri</span>
                     </div>
                 </div>
                 <div id="func1-forms" class="mt-3 input-container display-none">
                     <div id="span-container" class="display-flex fd-column">
-                        <span id="nome-span">Valor:</span>
                     </div>
                     <form action="http://localhost:8000/" method="get" class="formulario">
-                        <input type="text" name="valor-1" placeholder="Digite aqui" class="input-dados" />
                     </form>
+                    <button class="botao" onclick="save()">Confirmar</button>
                 </div>
             </div>
             <div id="func2" class="display-none" style="height: 90%;">

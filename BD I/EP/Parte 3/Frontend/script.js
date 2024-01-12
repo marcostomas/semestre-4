@@ -1,10 +1,14 @@
 const uri = "http://localhost:8000/";
 var endpoint = null;
 var funcaoAtivada = null;
+var tipoAtual = 0;
+var tipoAnterior = 0;
 
 function funcao1() {
+    if(tipoAtual !== 0){
+        return;
+    }
     this.funcaoAtivada = 1;
-    this.endpoint = "funcao1";
 
     this.abrirModal();
 }
@@ -161,11 +165,69 @@ function abrirModal() {
 function fecharModal() {
     switch (funcaoAtivada) {
         case 1:
+            var limit = null;
+            let listId = null;
+            if(tipoAtual !== 0){
+                switch(tipoAtual){
+                    case 1:
+                        listId = ["nome", "anosCinema", "site", "sexo", 
+                        "anoInicio", "anoNascimento", "nomeVerdadeiro", "estado", "funcoes"];
+                        
+                        limit = 9;
+                        break;
+                    case 2:
+                        listId = ["nome", "nacionaliddade", "tipoEvento", "numeroJurados",
+                        "anoInicio"];
+
+                        limit = 5;
+                        break;
+                    case 3:
+                        listId = ["nomePremio", "nomeEvento", "anoEdicao"];
+                        
+                        limit = 3;
+                        break;
+                    case 4:
+                        listId = ["nomeArtistico", "nomePremio", "nomeEvento", "anoEdicao", "tituloOriginal",
+                                  "anoDeProducao", "ganhou"];
+                        
+                        limit = 7;
+                        break;
+                    case 5:
+                        listId = ["nomeEvento", "ano", "dataEvento", "localEvento"];
+                        limit = 3;
+                        break;
+                    case 6:
+                        listId = ["tituloOriginal", "anoDeProducao", "tituloPtBr", "tema", "tipo",
+                        "arrecadacao1Ano", "idiomaOriginal", "totalArrecadado", "nacionalidade"];
+                        
+                        limit = 9;
+                        break;
+                    case 7:
+                        listId = ["nomeArtistico", "tituloFilme", "anoProducao"];
+                        limit = 3;
+                        break;
+                    case 8:
+                        listId = ["tituloFilme", "anoDeProducao", "nomePremio", "nomeEvento", "anoEdicao"];
+                        limit = 5;
+                        break;
+                    case 9:
+                        listId = ["nomeArtistico", "nomeEvento", "anoEdicao"];
+                        limit = 3;
+                        break;
+                }
+                console.log(listId);
+                for(i = 0;i < limit; i++){
+                    document.getElementById(`${listId[i]}-span`).remove();
+                    document.getElementById(`${listId[i]}-input`).remove();
+                }
+                tipoAtual = 0;
+                tipoAnterior = 0;
+            }
             document.getElementById("func1").classList.add("display-none");
             document.getElementById("func1").classList.remove("display-flex");
 
-            document.getElementById("func1-forms").classList.add("display-none")
-            document.getElementById("func1-forms").classList.remove("display-flex")
+            document.getElementById("func1-forms").classList.add("display-none");
+            document.getElementById("func1-forms").classList.remove("display-flex");
             break;
         case 2:
             document.getElementById("func2").classList.add("display-none");
@@ -227,7 +289,63 @@ window.onclick = function (event) {
 }
 
 function escolhaTipo(tipo) {
-    const span = document.getElementById("nome-span");
+    tipoAnterior = tipoAtual;
+    tipoAtual = tipo;
+
+    if(tipoAnterior !== 0){
+        switch(tipoAnterior){
+            case 1:
+                listId = ["nome", "anosCinema", "site", "sexo", 
+                "anoInicio", "anoNascimento", "nomeVerdadeiro", "estado", "funcoes"];
+                
+                limit = 9;
+                break;
+            case 2:
+                listId = ["nome", "nacionalidade", "tipoEvento", "numeroJurados",
+                "anoInicio"];
+
+                limit = 5;
+                break;
+            case 3:
+                listId = ["nomePremio", "nomeEvento", "anoEdicao"];
+                
+                limit = 3;
+                break;
+            case 4:
+                listId = ["nomeArtistico", "nomePremio", "nomeEvento", "anoEdicao", "tituloOriginal",
+                          "anoDeProducao", "ganhou"];
+                
+                limit = 7;
+                break;
+            case 5:
+                listId = ["nomeEvento", "ano", "dataEvento", "localEvento"];
+                limit = 4;
+                break;
+            case 6:
+                listId = ["tituloOriginal", "anoDeProducao", "tituloPtBr", "tema", "tipo",
+                          "arrecadacao1Ano", "idiomaOriginal", "totalArrecadado", "nacionalidade"];
+                
+                limit = 9;
+                break;
+            case 7:
+                listId = ["nomeArtistico", "tituloFilme", "anoDeProducao"];
+                limit = 3;
+                break;
+            case 8:
+                listId= ["tituloFilme", "anoDeProducao", "nomePremio", "nomeEvento", "anoEdicao"];
+                limit = 5;
+                break;
+            case 9:
+                listId = ["nomeArtistico", "nomeEvento", "anoEdicao"];
+                limit = 3;
+                break;
+        }
+        console.log(listId);
+        for(i = 0;i < limit; i++){
+            document.getElementById(`${listId[i]}-span`).remove();
+            document.getElementById(`${listId[i]}-input`).remove();
+        }
+    }
 
     if (document.getElementsByClassName("input-container")[0].classList.contains("display-none")) {
         document.getElementsByClassName("input-container")[0].classList.add("display-flex");
@@ -235,70 +353,357 @@ function escolhaTipo(tipo) {
     }
 
     if (tipo === 1) {
-        span.innerText = "Nome da Pessoa:";
-        document.getElementById("novo-input") !== null ? document.getElementById("novo-input").remove() : null;
-        document.getElementById("novo-span") !== null ? document.getElementById("novo-span").remove() : null;
 
+        let listId = ["nome", "anosCinema", "site", "sexo", 
+                      "anoInicio", "anoNascimento", "nomeVerdadeiro", "estado", "funcoes"];
+
+        let listMessage = ["Nome: ", "Anos de cinema: ", "Site: ", "Sexo: ", 
+                      "Ano de início: ", "Ano de nascimento: ", "Nome verdadeiro: ", "Estado Atual: ", "Funcoes: "];
+
+        let listTypes = ["text", "number", "url", "text", "number", "number", "text", "text", "text"];
+
+        for(let i = 0; i < 9; i++){
+            const novo_input = document.createElement("input");
+            novo_input.setAttribute("type", `${listTypes[i]}`);
+            novo_input.setAttribute("name", "valor-2");
+            novo_input.setAttribute("placeholder", "Digite aqui");
+            novo_input.setAttribute("style", "margin-top: 1rem;");
+            novo_input.setAttribute("id", `${listId[i]}-input`);
+            novo_input.classList.add("input-dados");
+    
+            const novo_span = document.createElement("span");
+            novo_span.setAttribute("style", "margin-top: 1rem;");
+            novo_span.setAttribute("id", `${listId[i]}-span`);
+            novo_span.innerText = `${listMessage[i]}`;
+    
+            
+            document.getElementsByClassName("formulario")[0].insertBefore(novo_input, null);
+            document.getElementById("span-container").insertBefore(novo_span, null);
+        }
     }
     else if (tipo === 2) {
-        span.innerText = "Nome do Evento:";
+        
+        let listId = ["nome", "nacionalidade", "tipoEvento", "numeroJurados",
+                      "anoInicio"];
 
-        document.getElementById("novo-input") !== null ? document.getElementById("novo-input").remove() : null;
-        document.getElementById("novo-span") !== null ? document.getElementById("novo-span").remove() : null;
+        let listMessage = ["Nome: ", "Nacionalidade: ", "Tipo: ", "Número de jurados: ",
+                           "Ano de início"];
 
-        const novo_input = document.createElement("input");
-        novo_input.setAttribute("type", "text");
-        novo_input.setAttribute("name", "valor-2");
-        novo_input.setAttribute("placeholder", "Digite aqui");
-        novo_input.setAttribute("style", "margin-top: 1rem;");
-        novo_input.setAttribute("id", "novo-input");
-        novo_input.classList.add("input-dados");
+        let listTypes = ["text", "text", "text", "number", "number"];
 
-        const novo_span = document.createElement("span");
-        novo_span.setAttribute("style", "margin-top: 1rem;");
-        novo_span.setAttribute("id", "novo-span");
-        novo_span.innerText = "Nome dos prêmios:";
-
-        document.getElementsByClassName("formulario")[0].insertBefore(novo_input, null);
-
-        console.log(document.getElementById("nome-span"))
-
-        document.getElementById("span-container").insertBefore(novo_span, null);
+        for(let i = 0; i < 5; i++){
+            const novo_input = document.createElement("input");
+            novo_input.setAttribute("type", `${listTypes[i]}`);
+            novo_input.setAttribute("name", "valor-2");
+            novo_input.setAttribute("placeholder", "Digite aqui");
+            novo_input.setAttribute("style", "margin-top: 1rem;");
+            novo_input.setAttribute("id", `${listId[i]}-input`);
+            novo_input.classList.add("input-dados");
+    
+            const novo_span = document.createElement("span");
+            novo_span.setAttribute("style", "margin-top: 1rem;");
+            novo_span.setAttribute("id", `${listId[i]}-span`);
+            novo_span.innerText = `${listMessage[i]}`;
+    
+            
+            document.getElementsByClassName("formulario")[0].insertBefore(novo_input, null);
+            document.getElementById("span-container").insertBefore(novo_span, null);
+        }
 
     }
     else if (tipo === 3) {
-        span.innerText = "Nominado(a):";
 
-        document.getElementById("novo-input") !== null ? document.getElementById("novo-input").remove() : null;
-        document.getElementById("novo-span") !== null ? document.getElementById("novo-span").remove() : null;
+        let listId = ["nomePremio", "nomeEvento", "anoEdicao"];
+
+        let listMessage = ["Nome do premio: ", "Nome do evento: ", "Ano da edicao: "];
+
+        let listTypes = ["text", "text", "number"];
+
+        for(let i = 0; i < 3; i++){
+            const novo_input = document.createElement("input");
+            novo_input.setAttribute("type", `${listTypes[i]}`);
+            novo_input.setAttribute("name", "valor-2");
+            novo_input.setAttribute("placeholder", "Digite aqui");
+            novo_input.setAttribute("style", "margin-top: 1rem;");
+            novo_input.setAttribute("id", `${listId[i]}-input`);
+            novo_input.classList.add("input-dados");
+    
+            const novo_span = document.createElement("span");
+            novo_span.setAttribute("style", "margin-top: 1rem;");
+            novo_span.setAttribute("id", `${listId[i]}-span`);
+            novo_span.innerText = `${listMessage[i]}`;
+    
+            
+            document.getElementsByClassName("formulario")[0].insertBefore(novo_input, null);
+            document.getElementById("span-container").insertBefore(novo_span, null);
+        }
+
     }
     else if (tipo === 4) {
-        span.innerText = "Nome da Premiação:";
+        let listId = ["nomeArtistico", "nomePremio", "nomeEvento", "anoEdicao", "tituloOriginal",
+                      "anoDeProducao", "ganhou"];
 
-        document.getElementById("novo-input") !== null ? document.getElementById("novo-input").remove() : null;
-        document.getElementById("novo-span") !== null ? document.getElementById("novo-span").remove() : null;
+        let listMessage = ["Nome do artista: ", "Nome do prêmio: ", "Nome do evento: ", "Ano da edição: ",
+                           "Título original: ", "Ano de produção: ", "Ganhou: "];
 
+        let listTypes = ["text", "text", "text", "number", "text", "number", "text"];
+
+        for(let i = 0; i < 7; i++){
+            const novo_input = document.createElement("input");
+            novo_input.setAttribute("type", `${listTypes[i]}`);
+            novo_input.setAttribute("name", "valor-2");
+            novo_input.setAttribute("placeholder", "Digite aqui");
+            novo_input.setAttribute("style", "margin-top: 1rem;");
+            novo_input.setAttribute("id", `${listId[i]}-input`);
+            novo_input.classList.add("input-dados");
+    
+            const novo_span = document.createElement("span");
+            novo_span.setAttribute("style", "margin-top: 1rem;");
+            novo_span.setAttribute("id", `${listId[i]}-span`);
+            novo_span.innerText = `${listMessage[i]}`;
+    
+            
+            document.getElementsByClassName("formulario")[0].insertBefore(novo_input, null);
+            document.getElementById("span-container").insertBefore(novo_span, null);
+        }
+
+    }
+    else if (tipo === 5) {
+        
+        let listId = ["nomeEvento", "ano", "dataEvento", "localEvento"];
+
+        let listMessage = ["Nome do evento: ", "Ano: ", "Data do evento: ", "Local do evento: "];
+
+        let listTypes = ["text", "number", "date", "text"];
+
+        for(let i = 0; i < 4; i++){
+            const novo_input = document.createElement("input");
+            novo_input.setAttribute("type", `${listTypes[i]}`);
+            novo_input.setAttribute("name", "valor-2");
+            novo_input.setAttribute("placeholder", "Digite aqui");
+            novo_input.setAttribute("style", "margin-top: 1rem;");
+            novo_input.setAttribute("id", `${listId[i]}-input`);
+            novo_input.classList.add("input-dados");
+    
+            const novo_span = document.createElement("span");
+            novo_span.setAttribute("style", "margin-top: 1rem;");
+            novo_span.setAttribute("id", `${listId[i]}-span`);
+            novo_span.innerText = `${listMessage[i]}`;
+    
+            
+            document.getElementsByClassName("formulario")[0].insertBefore(novo_input, null);
+            document.getElementById("span-container").insertBefore(novo_span, null);
+        }
+
+    }
+    else if (tipo === 6) {
+
+        let listId = ["tituloOriginal", "anoDeProducao", "tituloPtBr", "tema", "tipo",
+                      "arrecadacao1Ano", "idiomaOriginal", "totalArrecadado", "nacionalidade"];
+
+        let listMessage = ["Título original: ", "Ano de produção: ", "Título em pt-br: ", "Tema: ", 
+                "Tipo: ", "Arrecadação no 1ano: ", "Idioma original: ", "Total arrecadado: ", "Nacionalidade: "];
+
+        let listTypes = ["text", "number", "text", "text", "text", "number", "text", "number", "text"];
+
+        for(let i = 0; i < 9; i++){
         const novo_input = document.createElement("input");
-        novo_input.setAttribute("type", "text");
+        novo_input.setAttribute("type", `${listTypes[i]}`);
         novo_input.setAttribute("name", "valor-2");
         novo_input.setAttribute("placeholder", "Digite aqui");
         novo_input.setAttribute("style", "margin-top: 1rem;");
-        novo_input.setAttribute("id", "novo-input");
+        novo_input.setAttribute("id", `${listId[i]}-input`);
         novo_input.classList.add("input-dados");
 
         const novo_span = document.createElement("span");
         novo_span.setAttribute("style", "margin-top: 1rem;");
-        novo_span.setAttribute("id", "novo-span");
-        novo_span.innerText = "Nome dos filmes:";
+        novo_span.setAttribute("id", `${listId[i]}-span`);
+        novo_span.innerText = `${listMessage[i]}`;
+
 
         document.getElementsByClassName("formulario")[0].insertBefore(novo_input, null);
-
-        console.log(document.getElementById("nome-span"))
-
         document.getElementById("span-container").insertBefore(novo_span, null);
+        }
 
     }
+    else if (tipo === 7) {
 
+        let listId = ["nomeArtistico", "tituloFilme", "anoDeProducao"];
+
+        let listMessage = ["Nome artistico: ", "Titulo do filme: ", "Ano de producao: "];
+
+        let listTypes = ["text", "text", "number"];
+
+        for(let i = 0; i < 3; i++){
+            const novo_input = document.createElement("input");
+            novo_input.setAttribute("type", `${listTypes[i]}`);
+            novo_input.setAttribute("name", "valor-2");
+            novo_input.setAttribute("placeholder", "Digite aqui");
+            novo_input.setAttribute("style", "margin-top: 1rem;");
+            novo_input.setAttribute("id", `${listId[i]}-input`);
+            novo_input.classList.add("input-dados");
+    
+            const novo_span = document.createElement("span");
+            novo_span.setAttribute("style", "margin-top: 1rem;");
+            novo_span.setAttribute("id", `${listId[i]}-span`);
+            novo_span.innerText = `${listMessage[i]}`;
+    
+            
+            document.getElementsByClassName("formulario")[0].insertBefore(novo_input, null);
+            document.getElementById("span-container").insertBefore(novo_span, null);
+        }
+
+    }
+    else if (tipo === 8) {
+        let listId = ["tituloFilme", "anoDeProducao", "nomePremio", "nomeEvento", "anoEdicao"];
+
+        let listMessage = ["Título do filme: ", "Ano de produção: ", "Nome do prêmio: ", "Nome do evento: ", "Ano da edição"];
+
+        let listTypes = ["text", "number", "text", "text", "text", "number"];
+
+        for(let i = 0; i < 5; i++){
+            const novo_input = document.createElement("input");
+            novo_input.setAttribute("type", `${listTypes[i]}`);
+            novo_input.setAttribute("name", "valor-2");
+            novo_input.setAttribute("placeholder", "Digite aqui");
+            novo_input.setAttribute("style", "margin-top: 1rem;");
+            novo_input.setAttribute("id", `${listId[i]}-input`);
+            novo_input.classList.add("input-dados");
+    
+            const novo_span = document.createElement("span");
+            novo_span.setAttribute("style", "margin-top: 1rem;");
+            novo_span.setAttribute("id", `${listId[i]}-span`);
+            novo_span.innerText = `${listMessage[i]}`;
+    
+            
+            document.getElementsByClassName("formulario")[0].insertBefore(novo_input, null);
+            document.getElementById("span-container").insertBefore(novo_span, null);
+        }
+
+    }
+    else if (tipo === 9){
+        let listId = ["nomeArtistico", "nomeEvento", "anoEdicao"];
+
+        let listMessage = ["Nome do artista: ", "Nome do evento: ", "Ano da edição: "];
+
+        let listTypes = ["text", "text", "number"];
+
+        for(let i = 0; i < 3; i++){
+            const novo_input = document.createElement("input");
+            novo_input.setAttribute("type", `${listTypes[i]}`);
+            novo_input.setAttribute("name", "valor-2");
+            novo_input.setAttribute("placeholder", "Digite aqui");
+            novo_input.setAttribute("style", "margin-top: 1rem;");
+            novo_input.setAttribute("id", `${listId[i]}-input`);
+            novo_input.classList.add("input-dados");
+    
+            const novo_span = document.createElement("span");
+            novo_span.setAttribute("style", "margin-top: 1rem;");
+            novo_span.setAttribute("id", `${listId[i]}-span`);
+            novo_span.innerText = `${listMessage[i]}`;
+    
+            
+            document.getElementsByClassName("formulario")[0].insertBefore(novo_input, null);
+            document.getElementById("span-container").insertBefore(novo_span, null);
+        }
+    }
+}
+
+function save(){
+    var obj = new Object();
+    if(tipoAtual === 1){
+        obj.nomeArtistico = document.getElementById("nome-input").value;
+        obj.anosDeCinema = document.getElementById("anosCinema-input").value;
+        obj.site = document.getElementById("site-input").value;
+        obj.sexo = document.getElementById("sexo-input").value;
+        obj.anoInicio = document.getElementById("anoInicio-input").value;
+        obj.anoNascimento = document.getElementById("anoNascimento-input").value;
+        obj.nomeVerdadeiro = document.getElementById("nomeVerdadeiro-input").value;
+        obj.estadoAtual = document.getElementById("estado-input").value;
+        obj.flagAtor = true;
+        obj.flagDiretor = true;
+        obj.flagProdutor = true;
+        obj.flagRoteirista = true;
+        endpoint = "/artista/save";
+    } else if(tipoAtual === 2){
+        obj.nome = document.getElementById("nome-input").value;
+        obj.nacionalidade = document.getElementById("nacionalidade-input").value;
+        obj.tipoEvento = document.getElementById("tipoEvento-input").value;
+        obj.numeroJurados = document.getElementById("numeroJurados-input").value;
+        obj.anoInicio = document.getElementById("anoInicio-input").value;
+        endpoint = "/evento/save";
+    } else if(tipoAtual === 3){
+        obj.nomePremio = document.getElementById("nomePremio-input").value;
+        obj.nomeEvento = document.getElementById("nomeEvento-input").value;
+        obj.anoEdicao = document.getElementById("anoEdicao-input").value;
+        endpoint = "/premio/save";
+    } else if(tipoAtual === 4){
+        obj.nomeArtistico = document.getElementById("nomeArtistico-input").value;
+        obj.nomePremio = document.getElementById("nomePremio-input").value;
+        obj.nomeEvento = document.getElementById("nomeEvento-input").value;
+        obj.anoEdicao = document.getElementById("anoEdicao-input").value;
+        obj.tituloOriginal = document.getElementById("tituloOriginal-input").value;
+        obj.anoDeProducao = document.getElementById("anoDeProducao-input").value;
+        obj.ganhou = document.getElementById("ganhou-input").value;
+        endpoint = "/artistaIndicado/save";
+    } else if(tipoAtual === 5){ 
+        obj.nomeEvento = document.getElementById("nomeEvento-input").value;
+        obj.ano = document.getElementById("ano-input").value;
+        obj.dataEvento = document.getElementById("dataEvento-input").value;
+        obj.localEvento = document.getElementById("localEvento-input").value;
+        endpoint = "/edicao/save";
+    } else if(tipoAtual === 6){
+        obj.tituloOriginal = document.getElementById("tituloOriginal-input").value;
+        obj.anoDeProducao = document.getElementById("anoDeProducao-input").value;
+        obj.tituloPtBr = document.getElementById("tituloPtBr-input").value;
+        obj.tema = document.getElementById("tema-input").value;
+        obj.tipo = document.getElementById("tipo-input").value;
+        obj.arrecadacaoPrimAno = document.getElementById("arrecadacao1Ano-input").value;
+        obj.idiomaOriginal = document.getElementById("idiomaOriginal-input").value;
+        obj.totalArrecadado = document.getElementById("totalArrecadado-input").value;
+        obj.nacionalidade = document.getElementById("nacionalidade-input").value;
+        endpoint = "/filme/save";
+    } else if(tipoAtual === 7){ 
+        obj.nomeArtistico = document.getElementById("nomeArtistico-input").value;
+        obj.tituloFilmeOriginal = document.getElementById("tituloFilme-input").value;
+        obj.anoDeProducao = document.getElementById("anoDeProducao-input").value;
+        obj.flagAtor = true;
+        obj.eAtorPrincipal = true;
+        obj.flagDiretor = true;
+        obj.eDiretorPrincipal = true;
+        obj.flagProdutor = true;
+        obj.flagRoteirista = true;
+        endpoint = "/participaDe/save";
+    } else if(tipoAtual === 8){
+        obj.tituloOriginal = document.getElementById("tituloFilme-input").value;
+        obj.anoDeProducao = document.getElementById("anoDeProducao-input").value;
+        obj.nomePremio = document.getElementById("nomePremio-input").value;
+        obj.nomeEvento = document.getElementById("nomeEvento-input").value;
+        obj.anoEdicao = document.getElementById("anoEdicao-input").value;
+        endpoint = "/filmeindicado/save";
+    } else if(tipoAtual === 9){
+        //"nomeArtistico", "nomeEvento", "anoEdicao"
+        obj.nomeArtistico = document.getElementById("nomeArtistico-input").value;
+        obj.nomeEvento = document.getElementById("nomeEvento-input").value;
+        obj.anoEdicao = document.getElementById("anoEdicao-input").value;
+        endpoint = "/ejurado/save";
+    }
+
+    var jsonString = JSON.stringify(obj);
+    console.log(jsonString);
+
+
+
+    fetch(`http://localhost:8080${endpoint}`, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: jsonString
+    })
+    .then((response) => response.json())
+    .then((data) => console.log("Success:", data))
+    .catch((error) => console.error("Error:", error));
 }
 
 
