@@ -1,9 +1,13 @@
 package com.tuspeliculasfavoritas.app.controller;
 
 import com.tuspeliculasfavoritas.app.model.Artista;
+import com.tuspeliculasfavoritas.app.model.ArtistaIndicado;
 import com.tuspeliculasfavoritas.app.repository.ArtistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
@@ -18,11 +22,6 @@ public class ArtistaController {
         System.out.println(artista.getNomeArtistico());
         System.out.println(artista.getAnoInicio());
         artistaRepository.save(artista);
-    }
-
-    @PostMapping("/artista/get")
-    public void inserir() {
-        artistaRepository.findAll();
     }
 
 }
