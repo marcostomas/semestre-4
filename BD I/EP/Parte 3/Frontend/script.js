@@ -203,8 +203,8 @@ function fecharModal() {
                         limit = 9;
                         break;
                     case 7:
-                        listId = ["nomeArtistico", "tituloFilme", "anoProducao"];
-                        limit = 3;
+                        listId = ["nomeArtistico", "tituloFilme", "anoProducao", "funcoes"];
+                        limit = 4;
                         break;
                     case 8:
                         listId = ["tituloFilme", "anoDeProducao", "nomePremio", "nomeEvento", "anoEdicao"];
@@ -328,8 +328,8 @@ function escolhaTipo(tipo) {
                 limit = 9;
                 break;
             case 7:
-                listId = ["nomeArtistico", "tituloFilme", "anoDeProducao"];
-                limit = 3;
+                listId = ["nomeArtistico", "tituloFilme", "anoDeProducao", "funcoes"];
+                limit = 4;
                 break;
             case 8:
                 listId= ["tituloFilme", "anoDeProducao", "nomePremio", "nomeEvento", "anoEdicao"];
@@ -528,13 +528,13 @@ function escolhaTipo(tipo) {
     }
     else if (tipo === 7) {
 
-        let listId = ["nomeArtistico", "tituloFilme", "anoDeProducao"];
+        let listId = ["nomeArtistico", "tituloFilme", "anoDeProducao", "funcoes"];
 
-        let listMessage = ["Nome artistico: ", "Titulo do filme: ", "Ano de producao: "];
+        let listMessage = ["Nome artistico: ", "Titulo do filme: ", "Ano de producao: ", "Funções: "];
 
-        let listTypes = ["text", "text", "number"];
+        let listTypes = ["text", "text", "number", "text"];
 
-        for(let i = 0; i < 3; i++){
+        for(let i = 0; i < 4; i++){
             const novo_input = document.createElement("input");
             novo_input.setAttribute("type", `${listTypes[i]}`);
             novo_input.setAttribute("name", "valor-2");
@@ -620,10 +620,27 @@ function save(){
         obj.anoNascimento = document.getElementById("anoNascimento-input").value;
         obj.nomeVerdadeiro = document.getElementById("nomeVerdadeiro-input").value;
         obj.estadoAtual = document.getElementById("estado-input").value;
-        obj.flagAtor = true;
-        obj.flagDiretor = true;
-        obj.flagProdutor = true;
-        obj.flagRoteirista = true;
+        funcoes = document.getElementById("funcoes-input").value;
+        if(funcoes.includes("Ator")){
+            obj.flagAtor = true;
+        }else{
+            obj.flagAtor = false;
+        }
+        if(funcoes.includes("Diretor")){
+            obj.flagDiretor = true;
+        }else{
+            obj.flagDiretor = false;
+        }
+        if(funcoes.includes("Produtos")){
+            obj.flagProdutor = true;
+        }else{
+            obj.flagProdutor = false;
+        }
+        if(funcoes.includes("Roteirista")){
+            obj.flagRoteirista = true;
+        }else{
+            obj.flagRoteirista = false;
+        }
         endpoint = "/artista/save";
     } else if(tipoAtual === 2){
         obj.nome = document.getElementById("nome-input").value;
@@ -667,12 +684,37 @@ function save(){
         obj.nomeArtistico = document.getElementById("nomeArtistico-input").value;
         obj.tituloFilmeOriginal = document.getElementById("tituloFilme-input").value;
         obj.anoDeProducao = document.getElementById("anoDeProducao-input").value;
-        obj.flagAtor = true;
-        obj.eAtorPrincipal = true;
-        obj.flagDiretor = true;
-        obj.eDiretorPrincipal = true;
-        obj.flagProdutor = true;
-        obj.flagRoteirista = true;
+        funcoes = document.getElementById("funcoes-input").value;
+        if(funcoes.includes("Ator")){
+            obj.flagAtor = true;
+        }else{
+            obj.flagAtor = false;
+        }
+        if(funcoes.includes("Ator principal")){
+            obj.eAtorPrincipal= true;
+        }else{
+            obj.eAtorPrincipal= false;
+        }
+        if(funcoes.includes("Diretor")){
+            obj.flagDiretor = true;
+        }else{
+            obj.flagDiretor = false;
+        }
+        if(funcoes.includes("Diretor principal")){
+            obj.eDiretorPrincipal = true;
+        }else{
+            obj.eDiretorPrincipal = false;
+        }
+        if(funcoes.includes("Produtor")){
+            obj.flagProdutor = true;
+        }else{
+            obj.flagProdutor = false;
+        }
+        if(funcoes.includes("Roteirista")){
+            obj.flagRoteirista = true;
+        }else{
+            obj.flagRoteirista = false;
+        }
         endpoint = "/participaDe/save";
     } else if(tipoAtual === 8){
         obj.tituloOriginal = document.getElementById("tituloFilme-input").value;

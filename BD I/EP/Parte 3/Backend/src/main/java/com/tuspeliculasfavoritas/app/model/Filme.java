@@ -79,7 +79,7 @@ public class Filme {
         return arrecadacaoPrimAno;
     }
 
-    public void setArrecadaoPrimAno(Integer arrecadaoPrimAno) { this.arrecadacaoPrimAno = arrecadaoPrimAno;}
+    public void setArrecadaoPrimAno(Integer arrecadacaoPrimAno) { this.arrecadacaoPrimAno = arrecadacaoPrimAno;}
 
     public String getIdiomaOriginal() { return idiomaOriginal;}
 
