@@ -21,8 +21,11 @@ public class FilmeIndicado {
 
     @Column(name = "ano_edicao")
     private Integer anoEdicao;
-    
-    public String getTituloFilmeOriginal() {
+
+    @Column(name = "ganhou")
+    private Boolean ganhou;
+
+    public String getTituloOriginal() {
         return tituloOriginal;
     }
 
@@ -61,4 +64,12 @@ public class FilmeIndicado {
     public void setAnoEdicao(Integer anoEdicao) {
         this.anoEdicao = anoEdicao;
     };
+
+    public Boolean getGanhou() {
+        return ganhou;
+    }
+
+    public void setGanhou(Boolean ganhou) {
+        this.ganhou = ganhou;
+    }
 }

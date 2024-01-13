@@ -207,8 +207,8 @@ function fecharModal() {
                         limit = 4;
                         break;
                     case 8:
-                        listId = ["tituloFilme", "anoDeProducao", "nomePremio", "nomeEvento", "anoEdicao"];
-                        limit = 5;
+                        listId = ["tituloFilme", "anoDeProducao", "nomePremio", "nomeEvento", "anoEdicao", "ganhou"];
+                        limit = 6;
                         break;
                     case 9:
                         listId = ["nomeArtistico", "nomeEvento", "anoEdicao"];
@@ -332,8 +332,8 @@ function escolhaTipo(tipo) {
                 limit = 4;
                 break;
             case 8:
-                listId= ["tituloFilme", "anoDeProducao", "nomePremio", "nomeEvento", "anoEdicao"];
-                limit = 5;
+                listId= ["tituloFilme", "anoDeProducao", "nomePremio", "nomeEvento", "anoEdicao", "ganhou"];
+                limit = 6;
                 break;
             case 9:
                 listId = ["nomeArtistico", "nomeEvento", "anoEdicao"];
@@ -555,13 +555,13 @@ function escolhaTipo(tipo) {
 
     }
     else if (tipo === 8) {
-        let listId = ["tituloFilme", "anoDeProducao", "nomePremio", "nomeEvento", "anoEdicao"];
+        let listId = ["tituloFilme", "anoDeProducao", "nomePremio", "nomeEvento", "anoEdicao", "ganhou"];
 
-        let listMessage = ["Título do filme: ", "Ano de produção: ", "Nome do prêmio: ", "Nome do evento: ", "Ano da edição"];
+        let listMessage = ["Título do filme: ", "Ano de produção: ", "Nome do prêmio: ", "Nome do evento: ", "Ano da edição: ", "Ganhou: "];
 
-        let listTypes = ["text", "number", "text", "text", "text", "number"];
+        let listTypes = ["text", "number", "text", "text", "number", "text"];
 
-        for(let i = 0; i < 5; i++){
+        for(let i = 0; i < 6; i++){
             const novo_input = document.createElement("input");
             novo_input.setAttribute("type", `${listTypes[i]}`);
             novo_input.setAttribute("name", "valor-2");
@@ -661,7 +661,12 @@ function save(){
         obj.anoEdicao = document.getElementById("anoEdicao-input").value;
         obj.tituloOriginal = document.getElementById("tituloOriginal-input").value;
         obj.anoDeProducao = document.getElementById("anoDeProducao-input").value;
-        obj.ganhou = document.getElementById("ganhou-input").value;
+        testaSeEVencedor = document.getElementById("ganhou-input").value;
+        if(testaSeEVencedor.includes("Sim")){
+            obj.ganhou = true;
+        }else{
+            obj.ganhou = false;
+        }
         endpoint = "/artistaIndicado/save";
     } else if(tipoAtual === 5){ 
         obj.nomeEvento = document.getElementById("nomeEvento-input").value;
@@ -722,6 +727,12 @@ function save(){
         obj.nomePremio = document.getElementById("nomePremio-input").value;
         obj.nomeEvento = document.getElementById("nomeEvento-input").value;
         obj.anoEdicao = document.getElementById("anoEdicao-input").value;
+        testaSeEVencedor = document.getElementById("ganhou-input").value;
+        if(testaSeEVencedor.includes("Sim")){
+            obj.ganhou = true;
+        }else{
+            obj.ganhou = false;
+        }
         endpoint = "/filmeindicado/save";
     } else if(tipoAtual === 9){
         //"nomeArtistico", "nomeEvento", "anoEdicao"

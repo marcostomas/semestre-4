@@ -17,7 +17,7 @@ public class FilmeIndicadoController {
 
     @PostMapping("/filmeindicado/save")
     public void inserir(@RequestBody FilmeIndicado filmeIndicado){
-        System.out.println(filmeIndicado.getTituloFilmeOriginal());
+        System.out.println(filmeIndicado.getTituloOriginal());
         System.out.println(filmeIndicado.getAnoDeProducao());
         System.out.println(filmeIndicado.getNomePremio());
         System.out.println(filmeIndicado.getNomeEvento());
