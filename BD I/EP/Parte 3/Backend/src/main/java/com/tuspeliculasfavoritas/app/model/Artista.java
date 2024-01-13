@@ -74,6 +74,8 @@ public class Artista {
         return sexo;
     }
 
+    //  A
+
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
